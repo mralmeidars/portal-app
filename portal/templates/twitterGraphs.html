@@ -1,0 +1,108 @@
+{% extends "base.html" %}
+
+{% block script %}
+
+    <script type="text/javascript">
+
+        // Load and Draw Charts
+        google.charts.load('current', {'packages':['corechart']});
+
+        google.charts.setOnLoadCallback(drawChartTweetsUser);
+        google.charts.setOnLoadCallback(drawChartTweetsWeekday);
+        google.charts.setOnLoadCallback(drawChartTweetsHour);
+
+        function drawChartTweetsUser() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Users');
+            data.addColumn('number', 'Tweets');
+            data.addRows( {{ tweetsUser|safe }} );
+
+            var chart_options = {
+                title:'Tweets Per User - Top 50',
+                pieHole:0.5,
+                width:550,
+                height:400,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('tweetsUser'));
+            chart.draw(data, chart_options);
+        }
+
+        function drawChartTweetsWeekday() {
+            var data = new google.visualization.DataTable();
+            data.addColumn('string', 'Weekday');
+            data.addColumn('number', 'Tweets');
+            data.addRows( {{ tweetsWeekday|safe }} );
+
+            var chart_options = {
+                title:'Tweets Per Weekday',
+                is3D:true,
+                width:550,
+                height:400,
+            };
+
+            var chart = new google.visualization.PieChart(document.getElementById('tweetsWeekday'));
+            chart.draw(data, chart_options);
+        }
+
+        function drawChartTweetsHour() {
+
+            var data = new google.visualization.DataTable();
+            data.addColumn('timeofday', 'Hour');
+            data.addColumn('number', 'Tweets');
+            data.addRows( {{ tweetsHour|safe }} );
+
+            var chart_options = {
+                title: 'Tweets Per Hour',
+                annotations:{
+                            alwaysOutside: true,
+                            textStyle: {
+                                fontSize: 5,
+                                color: '#000',
+                                auraColor: 'none'
+                            }
+                },
+                hAxis:{
+                    title: 'Hours',
+                    format: 'h:mm a',
+                    viewWindow: {
+                                min: [0, 00, 0],
+                                max: [23, 00, 0]
+                                }
+                },
+                vAxis:{
+                        title: 'Rating (scale of 1-200)'
+                },
+            };
+
+            var chart = new google.visualization.ColumnChart(document.getElementById('tweetsHour'));
+            chart.draw(data, chart_options);
+        }
+    </script>
+
+{% endblock %}
+
+{% block content %}
+
+    <div class="page-header text-center">
+      <h4>Twitter Reports - Graphs</h4>
+    </div>
+
+    <div class="container">
+      <table class="columns">
+        <tr>
+          <td><div id="tweetsUser" style="border: 1px solid #ccc"></div></td>
+          <td><div id="tweetsWeekday" style="border: 1px solid #ccc"></div></td>
+        </tr>
+      </table>
+    </div>
+
+    <div class="container">
+      <table class="columns">
+        <tr>
+          <td><div id="tweetsHour" style="width: 1135px; height: 300px; border: 1px solid #ccc"></div></td>
+        </tr>
+      </table>
+    </div>
+
+{% endblock %}

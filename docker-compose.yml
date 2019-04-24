@@ -1,0 +1,9 @@
+web:
+  ports:
+    - "8000:8000"
+  volumes:
+    - .:/portal
+  links:
+    - dbmongo
+dbmongo:
+  image: mongo:4.0

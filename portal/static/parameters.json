@@ -1,0 +1,8 @@
+{
+    "MONGO_DB": "portalDB",
+    "GOOGLE_DB_COLLECTION": "google",
+    "TWITTER_DB_COLLECTION": "twitter",
+    "TRACKING_TERM": "telemedicina",
+    "TWITTER_LIMIT_SEARCH": 1000,
+    "GOOGLE_LIMIT_SEARCH": 100
+}

@@ -1,0 +1,90 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+  <div class="container">
+    <div class="page-header text-center">
+      <h3>Twitter Reports - Lists</h3>
+    </div>
+
+    <div class="col-xs-4 tweetsPerUser">
+      <a>Tweets per User - Top 50</a>
+      <table class="table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Users</th>
+            <th>Tweets</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tweetUser in tweetsUser %}
+            <tr>
+              <td>{{ tweetUser.user }}</td>
+              <td>{{ tweetUser.countTweets }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% if tweetsUser.has_other_pages %}
+        <ul class="pagination pagination-sm">
+          <li><a href="?page=1">First</a></li>
+          {% if tweetsUser.has_previous %}
+            <li><a href="?page={{ tweetsUser.previous_page_number }}">&laquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&laquo;</span></li>
+          {% endif %}
+          
+          {% if tweetsUser.has_next %}
+            <li><a href="?page={{ tweetsUser.next_page_number }}">&raquo;</a></li>
+          {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+          {% endif %}
+          <li><a href="?page={{ tweetsUser.paginator.num_pages }}">Last</a></li>
+          <li><a> Page {{ tweetsUser.number }} of {{ tweetsUser.paginator.num_pages }} </a></li>
+        </ul>
+      {% endif %}
+    </div>
+
+    <div class="col-xs-3 col-md-offset-1 tweetsPerWeekday">
+      <a>Tweets per Weekday</a>
+      <table class="table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Weekdays</th>
+            <th>Tweets</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tweetWeekday in tweetsWeekday %}
+            <tr>
+              <td>{{ tweetWeekday.dayOfWeekDesc }}</td>
+              <td>{{ tweetWeekday.countTweets }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+
+    <div class="col-xs-3 col-md-offset-1 tweetsPerHour">
+      <a>Tweets per Hour</a>
+      <table class="table-responsive table-striped">
+        <thead>
+          <tr>
+            <th>Hours</th>
+            <th>Tweets</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for tweetHour in tweetsHour %}
+            <tr>
+              <td>{{ tweetHour.hoursOfDay }}</td>
+              <td>{{ tweetHour.countTweets }}</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+{% endblock %}

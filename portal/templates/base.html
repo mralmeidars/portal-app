@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>P o r t a l</title>
+    <link rel="stylesheet" href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap.min.css">
+    <!--<link rel="stylesheet" href="https://getbootstrap.com/docs/3.4/dist/css/bootstrap-theme.min.css">-->
+
+    <script src="https://code.jquery.com/jquery-3.4.0.min.js"></script>
+    <script src="https://getbootstrap.com/docs/3.4/dist/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+    <style>
+        table {
+        font-family: arial, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+        }
+
+        td, th {
+        border: 1px solid #dddddd;
+        text-align: center;
+        padding: 1px;
+        }
+
+        tr:nth-child(even) {
+        background-color: #dddddd;
+        }
+
+    </style>
+
+    <nav class="navbar navbar-inverse">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/home">P o r t a l</a>
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Twitter Reports<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/portal/twitterlists">Lists</a></li>
+                            <li><a href="/portal/twittergraphs">Graphs</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Google Reports<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/portal/googlelists">Lists</a></li>
+                            <li><a href="/portal/googlegraphs">Graphs</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</head>
+
+<body>
+    {% block content %}
+    {% endblock %}
+
+    {% block script %}
+    {% endblock %}
+</body>
+</html>
