@@ -1,15 +1,15 @@
+FROM python:3.7.0-alpine3.8
 
-FROM python:alpine3.8
+# Set environment varibles
+ENV PYTHONDONTWRITEBYTECODE 1
+ENV PYTHONUNBUFFERED 1
 
-# ensure local python is preferred over distribution python
-ENV PATH /usr/local/bin:$PATH
+RUN apk add --update --no-cache g++ gcc libxslt-dev
 
-# http://bugs.python.org/issue19846
-# > At the moment, setting "LANG=C" on a Linux system *fundamentally breaks Python 3*, and that's not OK.
-ENV LANG C.UTF-8
-
-ADD . /portal
+RUN mkdir /portal
+WORKDIR /portal
+COPY requirements /portal
 
 RUN pip install -r requirements --user --no-warn-script-location
 
-ENTRYPOINT [ "python3 manage.py runserver"]
+COPY . /portal/
